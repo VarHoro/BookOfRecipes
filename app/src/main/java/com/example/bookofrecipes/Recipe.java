@@ -1,15 +1,30 @@
 package com.example.bookofrecipes;
 
-class Recipe {
-    private String title;
-    private String description;
+import com.google.gson.annotations.SerializedName;
 
-    public String getTitle() {
-        return title;
+import java.util.ArrayList;
+
+class Recipe extends RecipeBrief{
+    private ArrayList<String> images;
+    private Integer lastUpdated;
+    private String description;
+    private String instructions;
+    private Integer difficulty;
+
+    public ArrayList<String> getImages() {
+        return images;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
+
+    public Integer getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Integer lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public String getDescription() {
@@ -18,5 +33,21 @@ class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public Integer getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
     }
 }
