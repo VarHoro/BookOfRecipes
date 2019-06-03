@@ -9,5 +9,5 @@ public interface RecipesApi {
     Call<RecipeList> getRecipes();
 
     @GET("recipes/{uuid}")
-    Call<RecipeDetails> getRecipeDetails(@Path("uuid") String RecipeUuid);
+    Call<RecipeDetails> getRecipeDetails(@Path("uuid") String uuid);
 }

@@ -1,11 +1,13 @@
 package com.example.bookofrecipes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,9 +26,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     @NonNull
     @Override
-    public RecipeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecipeHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
         View itemView =  LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recipe_item_layout, parent, false);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemPosition = parent.indexOfChild(view);
+                Recipe item = recipes.get(itemPosition);
+                Context context = view.getContext();
+                Intent intent = new Intent(context, RecipeActivity.class);
+                intent.putExtra("uuid", item.getUuid());
+                context.startActivity(intent);
+            }
+        });
         return new RecipeHolder(itemView);
     }
 
