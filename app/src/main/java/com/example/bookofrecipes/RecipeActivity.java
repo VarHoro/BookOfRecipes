@@ -49,7 +49,7 @@ public class RecipeActivity extends AppCompatActivity {
                             recipeDetails = response.body().getRecipe();
                             name.setText(recipeDetails.getName());
                             description.setText(recipeDetails.getDescription());
-                            insctructions.setText(recipeDetails.getInstructions());
+                            insctructions.setText(recipeDetails.getInstructions().replaceAll("<br>", "\n"));
                             pagerAdapter = new RecipeFragmentPagerAdapter(getSupportFragmentManager());
                             pager.setAdapter(pagerAdapter);
                             pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
