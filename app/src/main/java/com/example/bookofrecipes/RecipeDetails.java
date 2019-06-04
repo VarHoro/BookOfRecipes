@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class RecipeDetails extends Recipe {
+    @SerializedName("similar")
     private ArrayList<RecipeBrief> similar;
 
     public ArrayList<RecipeBrief> getSimilar() {

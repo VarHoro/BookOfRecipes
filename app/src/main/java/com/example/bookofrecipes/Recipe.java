@@ -5,10 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 class Recipe extends RecipeBrief{
+    @SerializedName("images")
     private ArrayList<String> images;
+    @SerializedName("lastUpdated")
     private Integer lastUpdated;
+    @SerializedName("description")
     private String description;
+    @SerializedName("instructions")
     private String instructions;
+    @SerializedName("difficulty")
     private Integer difficulty;
 
     public ArrayList<String> getImages() {

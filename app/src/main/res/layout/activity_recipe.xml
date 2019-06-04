@@ -6,39 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".RecipeActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/recipe_name_details"
+    <ScrollView
+        android:id="@+id/scroll_view_details"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/app_name"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/recipe_description_details"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/app_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_name_details" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/recipe_name_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/scroll_view_details"
+                app:layout_constraintStart_toStartOf="@+id/scroll_view_details"
+                app:layout_constraintTop_toTopOf="@+id/scroll_view_details" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager_details"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_marginTop="8dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/scroll_view_details"
+                app:layout_constraintStart_toStartOf="@+id/scroll_view_details"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_name_details" />
+
+            <TextView
+                android:id="@+id/recipe_description_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/app_name"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="@+id/scroll_view_details"
+                app:layout_constraintStart_toStartOf="@+id/scroll_view_details"
+                app:layout_constraintTop_toBottomOf="@+id/view_pager_details" />
+
+            <TextView
+                android:id="@+id/recipe_instractions_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/app_name"
+                app:layout_constraintEnd_toEndOf="@+id/scroll_view_details"
+                app:layout_constraintStart_toStartOf="@+id/scroll_view_details"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_description_details" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

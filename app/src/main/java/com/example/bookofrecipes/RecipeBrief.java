@@ -3,7 +3,9 @@ package com.example.bookofrecipes;
 import com.google.gson.annotations.SerializedName;
 
 public class RecipeBrief {
+    @SerializedName("uuid")
     private String uuid;
+    @SerializedName("name")
     private String name;
 
     public String getUuid() {
