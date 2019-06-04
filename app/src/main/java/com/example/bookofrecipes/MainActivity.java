@@ -1,15 +1,11 @@
 package com.example.bookofrecipes;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import com.example.bookofrecipes.Model.Recipe;
+import com.example.bookofrecipes.Model.RecipeList;
+import com.example.bookofrecipes.WorkWithApi.NetworkService;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

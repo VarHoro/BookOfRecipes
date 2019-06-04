@@ -18,6 +18,10 @@ import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.bookofrecipes.Model.RecipeDetails;
+import com.example.bookofrecipes.Model.RecipeObect;
+import com.example.bookofrecipes.WorkWithApi.NetworkService;
+
 public class RecipeActivity extends AppCompatActivity {
 
     private RecipeDetails recipeDetails;

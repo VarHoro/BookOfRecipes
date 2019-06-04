@@ -1,10 +1,10 @@
-package com.example.bookofrecipes;
+package com.example.bookofrecipes.Model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-class Recipe extends RecipeBrief{
+public class Recipe extends RecipeBrief{
     @SerializedName("images")
     private ArrayList<String> images;
     @SerializedName("lastUpdated")

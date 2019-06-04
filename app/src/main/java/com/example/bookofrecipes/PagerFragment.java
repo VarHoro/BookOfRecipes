@@ -46,7 +46,7 @@ public class PagerFragment extends Fragment {
         Picasso.get().load(recipeImages.get(pageNumber)).into(imageView);
         if (recipeImages.size() > 1) {
             TextView textView = view.findViewById(R.id.page_number);
-            textView.setText(String.valueOf(pageNumber + 1));
+            textView.setText(String.valueOf(pageNumber + 1) + '/' + String.valueOf(recipeImages.size()));
         }
         return view;
     }

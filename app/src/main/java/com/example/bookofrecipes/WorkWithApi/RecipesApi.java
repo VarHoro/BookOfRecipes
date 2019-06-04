@@ -1,4 +1,7 @@
-package com.example.bookofrecipes;
+package com.example.bookofrecipes.WorkWithApi;
+
+import com.example.bookofrecipes.Model.RecipeList;
+import com.example.bookofrecipes.Model.RecipeObect;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

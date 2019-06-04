@@ -1,4 +1,4 @@
-package com.example.bookofrecipes;
+package com.example.bookofrecipes.Model;
 
 public class RecipeObect {
     private RecipeDetails recipe;

@@ -1,4 +1,4 @@
-package com.example.bookofrecipes;
+package com.example.bookofrecipes.Model;
 
 import java.util.ArrayList;
 
