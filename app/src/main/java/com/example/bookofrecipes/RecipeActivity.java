@@ -15,9 +15,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.bookofrecipes.Model.RecipeBrief;
 import com.example.bookofrecipes.Model.RecipeDetails;
 import com.example.bookofrecipes.Model.RecipeObect;
 import com.example.bookofrecipes.WorkWithApi.NetworkService;
@@ -29,6 +33,7 @@ public class RecipeActivity extends AppCompatActivity {
     private ViewPager pager;
     private PagerAdapter pagerAdapter;
     private RatingBar ratingBar;
+    private LinearLayout similarContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class RecipeActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.rating_bar_details);
         ratingBar.setNumStars(5);
         pager = findViewById(R.id.view_pager_details);
+        similarContainer = findViewById(R.id.recipe_similar_container_details);
 
         Intent intent = getIntent();
         String uuid = intent.getStringExtra("uuid");
@@ -78,6 +84,7 @@ public class RecipeActivity extends AppCompatActivity {
 
                                 }
                             });
+                            addSimilar();
                         }
 
                         @Override
@@ -102,6 +109,23 @@ public class RecipeActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return recipeDetails.getImages().size();
+        }
+    }
+
+    void addSimilar(){
+        for (final RecipeBrief s : recipeDetails.getSimilar()){
+            Button button = new Button(this);
+            button.setLayoutParams(new LinearLayout.LayoutParams(100, ViewGroup.LayoutParams.MATCH_PARENT));
+            button.setText(s.getName());
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(RecipeActivity.this, RecipeActivity.class);
+                    intent.putExtra("uuid", s.getUuid());
+                    startActivity(intent);
+                }
+            });
+            similarContainer.addView(button);
         }
     }
 }
