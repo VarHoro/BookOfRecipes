@@ -14,18 +14,17 @@ import retrofit2.Response;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 public class RecipeActivity extends AppCompatActivity {
 
     private RecipeDetails recipeDetails;
-    private TextView name, description, insctructions;
+    private TextView name, description, instructions;
     private ViewPager pager;
     private PagerAdapter pagerAdapter;
+    private RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,9 @@ public class RecipeActivity extends AppCompatActivity {
 
         name = findViewById(R.id.recipe_name_details);
         description = findViewById(R.id.recipe_description_details);
-        insctructions = findViewById(R.id.recipe_instractions_details);
+        instructions = findViewById(R.id.recipe_instractions_details);
+        ratingBar = findViewById(R.id.rating_bar_details);
+        ratingBar.setNumStars(5);
         pager = findViewById(R.id.view_pager_details);
 
         Intent intent = getIntent();
@@ -48,8 +49,13 @@ public class RecipeActivity extends AppCompatActivity {
                         public void onResponse(Call<RecipeObect> call, Response<RecipeObect> response) {
                             recipeDetails = response.body().getRecipe();
                             name.setText(recipeDetails.getName());
-                            description.setText(recipeDetails.getDescription());
-                            insctructions.setText(recipeDetails.getInstructions().replaceAll("<br>", "\n"));
+                            if (recipeDetails.getDescription() != null) {
+                                description.setText(recipeDetails.getDescription());
+                            } else {
+                                description.setVisibility(View.GONE);
+                            }
+                            instructions.setText(recipeDetails.getInstructions().replaceAll("<br>", "\n"));
+                            ratingBar.setRating(recipeDetails.getDifficulty());
                             pagerAdapter = new RecipeFragmentPagerAdapter(getSupportFragmentManager());
                             pager.setAdapter(pagerAdapter);
                             pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -78,8 +84,8 @@ public class RecipeActivity extends AppCompatActivity {
         }
     }
 
-    private class RecipeFragmentPagerAdapter extends FragmentPagerAdapter{
-        public RecipeFragmentPagerAdapter(FragmentManager manager){
+    private class RecipeFragmentPagerAdapter extends FragmentPagerAdapter {
+        public RecipeFragmentPagerAdapter(FragmentManager manager) {
             super(manager);
         }
 
