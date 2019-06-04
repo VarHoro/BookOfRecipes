@@ -24,7 +24,7 @@ public class PagerFragment extends Fragment {
     private int pageNumber;
     private ArrayList<String> recipeImages;
 
-    static PagerFragment newInstance(int page, ArrayList<String> images){
+    static PagerFragment newInstance(int page, ArrayList<String> images) {
         PagerFragment fragment = new PagerFragment();
         Bundle arguments = new Bundle();
         arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
@@ -46,8 +46,10 @@ public class PagerFragment extends Fragment {
         View view = inflater.inflate(R.layout.view_pager_layout, null);
         ImageView imageView = view.findViewById(R.id.recipe_image_view_details);
         Picasso.get().load(recipeImages.get(pageNumber)).into(imageView);
-        TextView textView = view.findViewById(R.id.page_number);
-        textView.setText(String.valueOf(pageNumber));
+        if (recipeImages.size() > 1) {
+            TextView textView = view.findViewById(R.id.page_number);
+            textView.setText(String.valueOf(pageNumber + 1));
+        }
         return view;
     }
 }
