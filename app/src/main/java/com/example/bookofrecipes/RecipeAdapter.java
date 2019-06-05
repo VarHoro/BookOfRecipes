@@ -2,10 +2,11 @@ package com.example.bookofrecipes;
 
 import android.content.Context;
 import android.content.Intent;
-import android.speech.RecognitionListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +18,14 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> implements Filterable {
 
     private ArrayList<Recipe> recipes;
+    private ArrayList<Recipe> recipesFiltered;
 
     public RecipeAdapter(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
+        this.recipesFiltered = recipes;
     }
 
     @NonNull
@@ -35,14 +38,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     @Override
     public void onBindViewHolder(@NonNull RecipeHolder holder, final int position) {
-        Recipe current = recipes.get(position);
+        Recipe current = recipesFiltered.get(position);
         Picasso.get().load(current.getImages().get(0)).into(holder.imageView);
         holder.titleTextView.setText(current.getName());
         holder.descriptionTextView.setText(current.getDescription());
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Recipe item = recipes.get(position);
+                Recipe item = recipesFiltered.get(position);
                 Context context = view.getContext();
                 Intent intent = new Intent(context, RecipeActivity.class);
                 intent.putExtra("uuid", item.getUuid());
@@ -53,7 +56,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     @Override
     public int getItemCount() {
-        return recipes.size();
+        return recipesFiltered.size();
     }
 
     class RecipeHolder extends RecyclerView.ViewHolder {
@@ -68,5 +71,37 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
             imageView = itemView.findViewById(R.id.recipe_image_view);
             card = itemView.findViewById(R.id.recipe_card);
         }
+    }
+
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                charString = charString.toLowerCase().trim();
+                if (charString.isEmpty()){
+                    recipesFiltered = recipes;
+                }else{
+                    ArrayList<Recipe> filteredList = new ArrayList<>();
+                    for (Recipe r: recipes){
+                        if (r.getName().toLowerCase().contains(charString)
+                                || r.getInstructions().toLowerCase().contains(charString)
+                                || (r.getDescription() != null && r.getDescription().toLowerCase().contains(charString))){
+                            filteredList.add(r);
+                        }
+                    }
+                    recipesFiltered = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = recipesFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                recipesFiltered = (ArrayList<Recipe>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
