@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -66,17 +67,15 @@ public class RecipeActivity extends AppCompatActivity {
                             }
                             instructions.setText(recipeDetails.getInstructions().replaceAll("<br>", "\n"));
                             ratingBar.setRating(recipeDetails.getDifficulty());
-                            pagerAdapter = new RecipeFragmentPagerAdapter(getSupportFragmentManager());
+                            pagerAdapter = new RecipeFragmentPagerAdapter(getSupportFragmentManager(), recipeDetails.getImages());
                             pager.setAdapter(pagerAdapter);
                             pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                                 @Override
                                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                                    //
                                 }
 
                                 @Override
                                 public void onPageSelected(int position) {
-
                                 }
 
                                 @Override
@@ -95,37 +94,27 @@ public class RecipeActivity extends AppCompatActivity {
         }
     }
 
-    private class RecipeFragmentPagerAdapter extends FragmentPagerAdapter {
-        public RecipeFragmentPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return PagerFragment.newInstance(position, recipeDetails.getImages());
-        }
-
-        @Override
-        public int getCount() {
-            return recipeDetails.getImages().size();
-        }
-    }
-
-    void addSimilar(){
-        for (final RecipeBrief s : recipeDetails.getSimilar()){
-            Button button = new Button(this);
-            button.setLayoutParams(new LinearLayout.LayoutParams(100, ViewGroup.LayoutParams.MATCH_PARENT));
-            button.setText(s.getName());
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(RecipeActivity.this, RecipeActivity.class);
-                    intent.putExtra("uuid", s.getUuid());
-                    startActivity(intent);
-                }
-            });
-            similarContainer.addView(button);
+    void addSimilar() {
+        if (recipeDetails.getSimilar().size() != 0) {
+            for (final RecipeBrief s : recipeDetails.getSimilar()) {
+                Button button = new Button(this);
+                button.setLayoutParams(new LinearLayout.LayoutParams(100, ViewGroup.LayoutParams.MATCH_PARENT));
+                button.setText(s.getName());
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(RecipeActivity.this, RecipeActivity.class);
+                        intent.putExtra("uuid", s.getUuid());
+                        startActivity(intent);
+                    }
+                });
+                similarContainer.addView(button);
+            }
+        } else {
+            TextView textView = findViewById(R.id.similar_text_view);
+            textView.setVisibility(View.GONE);
+            View similarContainer = findViewById(R.id.similar_views);
+            similarContainer.setVisibility(View.GONE);
         }
     }
 }

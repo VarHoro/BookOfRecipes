@@ -1,5 +1,6 @@
 package com.example.bookofrecipes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,14 @@ public class PagerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_pager_layout, null);
         ImageView imageView = view.findViewById(R.id.recipe_image_view_details);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ImageActivity.class);
+                intent.putExtra("image_name", recipeImages.get(pageNumber));
+                startActivity(intent);
+            }
+        });
         Picasso.get().load(recipeImages.get(pageNumber)).into(imageView);
         if (recipeImages.size() > 1) {
             TextView textView = view.findViewById(R.id.page_number);

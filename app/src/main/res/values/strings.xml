@@ -7,4 +7,8 @@
     <string name="blank"></string>
     <string name="dif_level">Level of difficulty:</string>
     <string name="similar_string">Similar recipes:</string>
+
+    <string name="title_activity_image">ImageActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
