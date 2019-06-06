@@ -2,6 +2,7 @@ package com.example.bookofrecipes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -100,6 +101,8 @@ public class RecipeActivity extends AppCompatActivity {
                 Button button = new Button(this);
                 button.setLayoutParams(new LinearLayout.LayoutParams(100, ViewGroup.LayoutParams.MATCH_PARENT));
                 button.setText(s.getName());
+                button.setTextColor(getResources().getColor(R.color.colorAccent));
+                button.setBackgroundTintList(ContextCompat.getColorStateList(RecipeActivity.this, R.color.colorPrimary));
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
