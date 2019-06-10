@@ -2,7 +2,7 @@ package com.example.bookofrecipes.Model;
 
 import java.util.ArrayList;
 
-public class RecipeList {
+public class RecipeList { //object for array<recipeModel.list>
     private ArrayList<Recipe> recipes;
 
     public ArrayList<Recipe> getRecipes() {

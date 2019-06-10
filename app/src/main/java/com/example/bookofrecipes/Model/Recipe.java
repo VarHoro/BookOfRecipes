@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Recipe extends RecipeBrief{
+public class Recipe extends RecipeBrief{ //Object for recipeModel.list
     @SerializedName("images")
     private ArrayList<String> images;
     @SerializedName("lastUpdated")

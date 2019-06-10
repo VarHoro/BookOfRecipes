@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class RecipeDetails extends Recipe {
+public class RecipeDetails extends Recipe {//object for recipeModel.details
     @SerializedName("similar")
     private ArrayList<RecipeBrief> similar;
 

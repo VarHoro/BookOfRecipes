@@ -9,7 +9,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //recycler and json
         initViews();
+        //search
         SearchManager manager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView = findViewById(R.id.search_view);
         searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));

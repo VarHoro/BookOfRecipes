@@ -3,7 +3,7 @@ package com.example.bookofrecipes.Model;
 public class RecipeObect {
     private RecipeDetails recipe;
 
-    public RecipeDetails getRecipe() {
+    public RecipeDetails getRecipe() {//object for object<recipeModel.details>
         return recipe;
     }
 

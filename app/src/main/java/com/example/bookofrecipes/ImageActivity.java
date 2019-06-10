@@ -42,7 +42,9 @@ public class ImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
         getSupportActionBar().hide();
+
         imageView = findViewById(R.id.image_view_image_activity);
+        //getting uuid from extra
         Intent intent = getIntent();
         String picName = intent.getStringExtra("image_name");
         if (picName!= null){
@@ -50,10 +52,12 @@ public class ImageActivity extends AppCompatActivity {
         } else{
             Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show();
         }
+        //trying to save on fab click
         fab = findViewById(R.id.fab_save);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //checking permissions for writing/reading
                 if (ContextCompat.checkSelfPermission(ImageActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(ImageActivity.this,
                             new String[]{
@@ -83,14 +87,16 @@ public class ImageActivity extends AppCompatActivity {
     void saveImageToGallery(){
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-
+        //get or create directory "Pictures"
         File sdCard = Environment.getExternalStorageDirectory();
         File dir = new File(sdCard.getAbsolutePath() + "/pictures");
         dir.mkdir();
+        //generating name for image
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
         String fileName = "Image-" + n + ".jpg";
+        //trying to save
         File outFile = new File(dir, fileName);
         try {
             FileOutputStream outputStream = new FileOutputStream(outFile);

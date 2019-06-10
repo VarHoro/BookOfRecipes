@@ -2,7 +2,7 @@ package com.example.bookofrecipes.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RecipeBrief {
+public class RecipeBrief { //object for recipeModel.brief
     @SerializedName("uuid")
     private String uuid;
     @SerializedName("name")
